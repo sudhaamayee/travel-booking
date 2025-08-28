@@ -1,0 +1,61 @@
+{% extends "booking/base.html" %}
+
+{% block content %}
+
+<!-- ===== Hero Section ===== -->
+<section class="hero-section text-white d-flex align-items-center mt-0"
+         style="background: url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; height: 80vh;">
+  <div class="container text-center">
+    <h1 class="fw-bold display-5">Find Your Perfect Journey</h1>
+    <p class="lead mb-4">Book flights, trains, and buses at the best prices</p>
+
+    <!-- Search Form -->
+    <form method="GET" action="{% url 'travel_options' %}" 
+      class="row g-2 justify-content-center bg-light p-3 rounded shadow-sm" 
+      style="max-width: 800px; margin: auto;">
+  <div class="col-md-4">
+    <input type="text" name="source" class="form-control" placeholder="From (City)" required>
+  </div>
+  <div class="col-md-4">
+    <input type="text" name="destination" class="form-control" placeholder="To (City)" required>
+  </div>
+  <div class="col-md-2">
+    <input type="date" name="date" class="form-control" required>
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary w-100">
+      <i class="bi bi-search"></i> Search
+    </button>
+  </div>
+</form>
+
+  </div>
+</section>
+
+<!-- ===== Travel Options Section ===== -->
+<section class="container my-5">
+  <h2 class="mb-4 fw-bold">Available Travel Options</h2>
+
+  <div class="row">
+    {% for option in options %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ option.type }}: {{ option.source }} → {{ option.destination }}</h5>
+          <p class="card-text">₹ {{ option.price }} | {{ option.datetime }}</p>
+          <p class="card-text">Available Seats: {{ option.available_seats }}</p>
+          <a href="{% url 'book_travel' option.id %}" class="btn btn-success">Book Now</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>No travel options available.</p>
+    {% endfor %}
+  </div>
+</section>
+
+
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<div class="container py-5 text-center">
+  <div class="alert alert-success p-4 shadow-sm">
+    <h3 class="mb-2">Booking Confirmed ✅</h3>
+    <p>Booking ID: <strong>#{{ booking.id }}</strong></p>
+    <p>{{ booking.travel_option.get_type_display }} {{ booking.travel_option.source }} → {{ booking.travel_option.destination }} on {{ booking.travel_option.datetime|date:"M d, Y H:i" }}</p>
+    <p>Total: ₹ {{ booking.total_price }}</p>
+    <a href="{% url 'my_bookings' %}" class="btn btn-primary mt-2">Go to My Bookings</a>
+  </div>
+</div>
+{% endblock %}

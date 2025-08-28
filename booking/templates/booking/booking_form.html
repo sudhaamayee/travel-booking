@@ -1,0 +1,28 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4">Booking: {{ travel.get_type_display }} {{ travel.source }} → {{ travel.destination }}</h2>
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <div class="card p-4 shadow-sm">
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">Seats</label>
+            {{ form.number_of_seats }}
+          </div>
+          <button class="btn btn-success">Confirm Booking</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card p-4 h-100 shadow-sm">
+        <h5 class="mb-2">Trip Details</h5>
+        <p class="mb-1"><strong>Date/Time:</strong> {{ travel.datetime|date:"M d, Y H:i" }}</p>
+        <p class="mb-1"><strong>Price per seat:</strong> ₹ {{ travel.price }}</p>
+        <p class="mb-0"><strong>Seats left:</strong> {{ travel.available_seats }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

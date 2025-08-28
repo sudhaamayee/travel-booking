@@ -1,0 +1,24 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4">My Bookings</h2>
+  {% for b in bookings %}
+  <div class="card p-3 mb-3 shadow-sm">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+      <div>
+        <div class="fw-semibold">{{ b.travel_option.get_type_display }} {{ b.travel_option.source }} → {{ b.travel_option.destination }}</div>
+        <div class="text-muted small">{{ b.travel_option.datetime|date:"M d, Y H:i" }} • Seats: {{ b.number_of_seats }}</div>
+      </div>
+      <div>
+        <span class="badge bg-{% if b.status == 'confirmed' %}success{% else %}secondary{% endif %} me-3 text-uppercase">{{ b.status }}</span>
+        {% if b.status == 'confirmed' %}
+          <a class="btn btn-outline-danger btn-sm" href="{% url 'cancel_booking' b.id %}">Cancel</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p class="text-muted">No bookings yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4">My Profile</h2>
+  <div class="card p-4 shadow-sm">
+    <p class="mb-1"><strong>Username:</strong> {{ request.user.username }}</p>
+    <p class="mb-3"><strong>Email:</strong> {{ request.user.email }}</p>
+    <a class="btn btn-outline-primary" href="/">Back to Explore</a>
+  </div>
+</div>
+{% endblock %}

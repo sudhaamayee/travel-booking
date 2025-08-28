@@ -1,0 +1,10 @@
+:root{--brand:#0d6efd}
+.hero-section{position:relative}
+.hero-section::after{content:'';position:absolute;inset:0;background:rgba(13,110,253,.2)}
+.hero-section form {
+  /* This ensures the element can be clicked on */
+  pointer-events: auto !important;
+
+  /* This brings the form to the very top layer */
+  z-index: 100 !important;
+}
